@@ -2,7 +2,7 @@ module shift_rows(
     input   logic         enable,
     input   logic [127:0] a,
     output  logic [127:0] y
-)
+);
     logic [127:0] y_interm;
  
     always_comb begin

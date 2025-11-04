@@ -3,16 +3,17 @@ module key_expansion(
     input   logic         reset, 
     input   logic [127:0] key,
     output  logic [31:0]  w [0:43] //4 * (Nr + 1) words
-)
+);
 
     //constants
-    int WORD_WIDTH = 32;
-    int BYTE_WIDTH = 8;
-    int Nk = 4;
-    int Nr = 10;
-
-    typedef enum logic [1:0] {IDLE, GEN_W, GEN_TEMP1, GEN_TEMP2, GEN_TEMP3};
-    statetype state, nextstate
+    integer WORD_WIDTH = 32;
+    integer BYTE_WIDTH = 8;
+    integer Nk = 4;
+    integer Nr = 10;
+	integer i = 0;
+	
+    typedef enum logic [3:0] {IDLE, GEN_W, GEN_TEMP0, GEN_TEMP1A, GEN_TEMP1B, GEN_TEMP1C, GEN_TEMP1D, GEN_TEMP2};
+    statetype state, nextstate;
 
     logic [31:0] temp, nexttemp; // temp word to assign to w
 
@@ -33,12 +34,10 @@ module key_expansion(
             temp <= nexttemp;
         end
     end
-
     //Counter Register
-    always_ff @(posdedge clk) begin
+    always_ff @(posedge clk) begin
         if(state == IDLE) i <= 0;
         else if (state == GEN_TEMP0) i++;
-        else i <= i;
     end
 
     // Next State Logic
@@ -60,18 +59,23 @@ module key_expansion(
             default:    nextstate <= state;
         endcase
     end
-
+    
+	assign addroundkey_flag = (state == ROUND0);
+    assign subbytes_flag = (state == SUB_BYTES1);
+    assign shiftrows_flag = (state == SHIFT_ROWS);
+    assign mixcols_flag = (state == MIX_COLUMNS);
+    assign addroundkey_flag = (state == ADD_ROUND_KEY);
+	
     // Output Logic
     always_comb begin
         case(state)
-            IDLE:
-            GEN_W:          w[i] <= key[(i * WORD_WIDTH) : (i*WORD_WIDTH + i*WORD_WIDTH-1)];
+            GEN_W:          w[i] <= key[(i * WORD_WIDTH) +: (i*WORD_WIDTH-1)];
             GEN_TEMP0:      temp <= w[i-1];
             GEN_TEMP1A:     rotword_flag <= 1;
             GEN_TEMP1B:     subword_flag <= 1;
             GEN_TEMP1D:     temp <= temp ^ rcon[i/Nk];
             GEN_TEMP2:      w[i] <= w[i-Nk]^temp;
-            default:
+            default:		w[i] <= 0;
         endcase
     end
     sub_word sub_word( //consumes a clk cycle

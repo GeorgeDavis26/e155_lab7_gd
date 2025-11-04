@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RadiantProject version="4.2" radiant="2024.2.0.3.0" title="gd_e155_lab7_lattice_proj" device="iCE40UP5K-SG48I" performance_grade="High-Performance_1.2V" family_int="ice40tp" device_int="itpa08" package_int="SG48" operation_int="IND" speed_int="6" default_implementation="lattice_proj">
+    <Options/>
+    <Implementation title="lattice_proj" dir="lattice_proj" description="lattice_proj" synthesis="lse" default_strategy="Strategy1">
+        <Options def_top="sub_word"/>
+        <Source name="../add_round_key.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog" top_module="add_round_key"/>
+        </Source>
+        <Source name="../aes_core.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog"/>
+        </Source>
+        <Source name="../aes_core_tb.sv" type="Verilog" type_short="Verilog" excluded="TRUE">
+            <Options VerilogStandard="System Verilog"/>
+        </Source>
+        <Source name="../aes_sbox_tb.sv" type="Verilog" type_short="Verilog" excluded="TRUE">
+            <Options VerilogStandard="System Verilog"/>
+        </Source>
+        <Source name="../aes_spi.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog"/>
+        </Source>
+        <Source name="../aes_spi_tb.sv" type="Verilog" type_short="Verilog" excluded="TRUE">
+            <Options VerilogStandard="System Verilog"/>
+        </Source>
+        <Source name="../galo_is_mult.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog" top_module="galo_is_mult"/>
+        </Source>
+        <Source name="../gd_lab7_aes.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog" top_module="gd_lab7_aes"/>
+        </Source>
+        <Source name="../key_expansion.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog"/>
+        </Source>
+        <Source name="../mix_column.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog" top_module="mix_column"/>
+        </Source>
+        <Source name="../mix_columns.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog" top_module="mix_columns"/>
+        </Source>
+        <Source name="../rot_word.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog" top_module="rot_word"/>
+        </Source>
+        <Source name="../sbox.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog" top_module="sbox"/>
+        </Source>
+        <Source name="../sbox_sync.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog"/>
+        </Source>
+        <Source name="../shift_rows.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog" top_module="shift_rows"/>
+        </Source>
+        <Source name="../sub_bytes.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog" top_module="sub_bytes"/>
+        </Source>
+        <Source name="../sub_word.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog" top_module="sub_word"/>
+        </Source>
+    </Implementation>
+    <Strategy name="Strategy1" file="gd_e155_lab7_lattice_proj1.sty"/>
+</RadiantProject>

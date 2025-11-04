@@ -26,11 +26,11 @@ module aes_core(input  logic         clk,
                 output logic [127:0] cyphertext
 );
 
-    int Nr = 10;
-    int Nb = 4;
+    integer Nr = 10;
+    integer round;
     logic reset = ~rst; // active low reset
 
-    logic [31:0] w [0:43] //4 * (Nr + 1) words
+    logic [31:0] w [0:43]; //4 * (Nr + 1) words
     
     key_expansion key_expansion(
         .clk(clk),      //input
@@ -40,10 +40,10 @@ module aes_core(input  logic         clk,
     );
 
     logic subbytes_flag, shiftrows_flag, mixcols_flag, addroundkey_flag;
-    logic round = 0;
+	assign round = 0;
 
-    typedef enum logic [2:0] {IDLE, R1, SUB_BYTES1, SUB_BYTES2, SHIFT_ROWS, MIX_COLUMNS, ADD_ROUND_KEY}; //TODO: FIX
-    statetype state, nextstate
+    typedef enum logic [3:0] {IDLE, ROUND0, SUB_BYTES1, SUB_BYTES2, SHIFT_ROWS, MIX_COLUMNS, ADD_ROUND_KEY};
+    statetype state, nextstate;
 
     logic [127:0] code, nextcode;
     assign nextcode = plaintext; // state <- in
@@ -61,9 +61,9 @@ module aes_core(input  logic         clk,
     end
     
     //round Register
-    always_ff @(posdedge clk) begin
+    always_ff @(posedge clk) begin
         if(state == IDLE) round <= 0;
-        else if (state == SUB_BYTES) round++;
+        else if (state == SUB_BYTES1) round++;
         else round <= round;
     end
 
@@ -77,9 +77,9 @@ module aes_core(input  logic         clk,
             SUB_BYTES2:     nextstate <= SHIFT_ROWS;   
             SHIFT_ROWS:     if(round == Nr) nextstate <= ADD_ROUND_KEY;
                             else nextstate <= MIX_COLUMNS;
-            MIX_COLUMNS1:   nextstate <= ADD_ROUND_KEY;
+            MIX_COLUMNS:   nextstate <= ADD_ROUND_KEY;
             ADD_ROUND_KEY:  if(round == Nr) nextstate <= IDLE;
-                            else nextstate <= SUB_BYTES;
+                            else nextstate <= SUB_BYTES1;
             default:        nextstate <= IDLE;
         endcase
     end
@@ -87,7 +87,7 @@ module aes_core(input  logic         clk,
     //Output Logic for Control Signals
     assign addroundkey_flag = (state == ROUND0);
     assign subbytes_flag = (state == SUB_BYTES1);
-    assgin shiftrows_flag = (state == SHIFT_ROWS);
+    assign shiftrows_flag = (state == SHIFT_ROWS);
     assign mixcols_flag = (state == MIX_COLUMNS);
     assign addroundkey_flag = (state == ADD_ROUND_KEY);
 
@@ -113,7 +113,7 @@ module aes_core(input  logic         clk,
 
     add_round_key add_round_key(
         .enable(addroundkey_flag),  //input
-        .w(w[4*round:4*round+3])    //input [31:0][0:3] 
+        .w(w[4*round+:3]),    //input [31:0][0:3] 
         .a(code),                   //input [127:0]
         .y(nextcode)        //output [127:0]
     );

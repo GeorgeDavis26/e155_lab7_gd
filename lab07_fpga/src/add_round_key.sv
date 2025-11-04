@@ -1,9 +1,9 @@
 module add_round_key(
     input   logic         enable,
-    output  logic [31:0]  w [0:3] //4 * (Nr + 1) words
+    input	logic [127:0] w, //4 * (Nr + 1) words
     input   logic [127:0] a,
     output  logic [127:0] y
-)
+);
     assign y = enable ? (a ^ w) : (a);
 endmodule
     // typedef enum logic [1:0] {IDLE, ADD};

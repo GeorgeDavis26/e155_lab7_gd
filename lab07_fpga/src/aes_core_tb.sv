@@ -9,11 +9,11 @@
 /////////////////////////////////////////////
 
 module testbench_aes_core();
-    logic clk, load, done;
+    logic clk, load, done, rst;
     logic [127:0] key, plaintext, cyphertext, expected;
     
     // device under test
-    aes_core dut(clk, load, key, plaintext, done, cyphertext);
+    aes_core dut(clk, rst, load, key, plaintext, done, cyphertext);
     
     // test case
     initial begin   

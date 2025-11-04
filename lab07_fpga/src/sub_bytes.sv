@@ -5,7 +5,7 @@ module sub_bytes(
     output  logic [127:0] y
 );
 
-    logic   [127:0]    y_interm
+    logic   [127:0]    y_interm;
 
     //Row 1
     sbox_sync S00(a[127:120], clk, y_interm[127:120]);
@@ -80,4 +80,3 @@ endmodule
     //         default:    y <= a;
     //     endcase
     // end
-endmodule
