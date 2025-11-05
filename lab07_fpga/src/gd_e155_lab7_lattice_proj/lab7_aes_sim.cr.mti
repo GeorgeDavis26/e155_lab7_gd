@@ -1,0 +1,99 @@
+C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/galo_is_mult.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/galo_is_mult.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module galo_is_mult
+
+Top level modules:
+	galo_is_mult
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/add_round_key.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/add_round_key.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module add_round_key
+
+Top level modules:
+	add_round_key
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/gd_lab7_aes.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/gd_lab7_aes.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module gd_lab7_aes
+
+Top level modules:
+	gd_lab7_aes
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/mix_column.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/mix_column.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module mix_column
+
+Top level modules:
+	mix_column
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/mix_columns.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/mix_columns.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module mix_columns
+
+Top level modules:
+	mix_columns
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/sub_bytes.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/sub_bytes.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module sub_bytes
+
+Top level modules:
+	sub_bytes
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/shift_rows.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/shift_rows.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module shift_rows
+
+Top level modules:
+	shift_rows
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/sbox_sync.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/sbox_sync.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module sbox_sync
+
+Top level modules:
+	sbox_sync
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_core.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_core.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module aes_core
+
+Top level modules:
+	aes_core
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_sbox_tb.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_sbox_tb.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module testbench_aes_sbox
+
+Top level modules:
+	testbench_aes_sbox
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_spi_tb.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_spi_tb.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module testbench_aes_spi
+
+Top level modules:
+	testbench_aes_spi
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/key_expansion_tb.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/key_expansion_tb.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module testbench_key_expansion
+
+Top level modules:
+	testbench_key_expansion
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_spi.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_spi.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module aes_spi
+
+Top level modules:
+	aes_spi
+
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_core_tb.sv {1 {vlog -work work -vopt -sv -stats=none {C:\Users\gdavis\Desktop\e155_lab7_gd\lab07_fpga\src\aes_core_tb.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module testbench_aes_core
+
+Top level modules:
+	testbench_aes_core
+
+} {} {}}

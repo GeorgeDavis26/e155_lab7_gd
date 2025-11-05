@@ -5,6 +5,13 @@ Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 Top level modules:
 	galo_is_mult
 
+} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/gd_lab7_aes.sv {1 {vlog -work work -vopt -sv -stats=none {C:\Users\gdavis\Desktop\e155_lab7_gd\lab07_fpga\src\gd_lab7_aes.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module gd_lab7_aes
+
+Top level modules:
+	gd_lab7_aes
+
 } {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/add_round_key.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/add_round_key.sv
 Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 -- Compiling module add_round_key
@@ -54,13 +61,6 @@ Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 
 Top level modules:
 	sbox_sync
-
-} {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_spi_tb.sv {1 {vlog -work work -vopt -sv -stats=none {C:\Users\gdavis\Desktop\e155_lab7_gd\lab07_fpga\src\aes_spi_tb.sv}
-Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
--- Compiling module testbench_aes_spi
-
-Top level modules:
-	testbench_aes_spi
 
 } {} {}} C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_core.sv {1 {vlog -work work -vopt -sv -stats=none C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/aes_core.sv
 Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024

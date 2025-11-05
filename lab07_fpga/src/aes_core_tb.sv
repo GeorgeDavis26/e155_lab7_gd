@@ -35,6 +35,7 @@ module testbench_aes_core();
 		end
         
     initial begin
+      rst = 1'b0; #22; rst = 1'b1; //Pulse rest to start conversion      
       load = 1'b1; #22; load = 1'b0; //Pulse load to start conversion
     end
 

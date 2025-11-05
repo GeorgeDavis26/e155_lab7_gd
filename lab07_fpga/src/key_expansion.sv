@@ -9,10 +9,10 @@ module key_expansion(
 
 	logic [31:0] i;
 	
-    typedef enum logic [3:0] {IDLE, GEN_W, LOGIC, END} statetype;
+    typedef enum logic [3:0] {IDLE, GEN_W, LOAD, SBOX, LOGIC, DONE} statetype;
     statetype state, nextstate;
 	
-    logic [31:0] temp, rot_temp, sub_temp; // temp word to assign to w
+    logic [31:0] temp, nexttemp, rot_temp, sub_temp; // temp word to assign to w
 	
     logic [31:0] rcon [1:10];
     assign rcon = {
@@ -25,44 +25,72 @@ module key_expansion(
         if(reset) state <= IDLE;
         else state <= nextstate;
     end
-	
+
+    //Next temp Register
+    always_ff @(posedge clk) begin
+        if(reset) temp <= 32'b0;
+        else temp <= nexttemp;
+    end
+
+    //round Register
+    always_ff @(posedge clk) begin
+        if(state == IDLE) i = 0;
+        else if(state == GEN_W) i = 4;
+        else if (state == LOGIC) i++;
+    end
     // Next State Logic
     always_comb begin
         case(state)
             IDLE:       if(enable) nextstate <= GEN_W;
                         else nextstate <= IDLE;
-            GEN_W:      if(i == 4-1) nextstate <= LOGIC;   //w[i] <- key[4*i..4*i+3]
-                        else nextstate <= GEN_W;                
+            GEN_W:      nextstate <= LOAD;   //w[i] <- key[4*i..4*i+3]               
             //WHEN THE LOOP CONCLUDES i=Nk
-            LOGIC:  		if(i == (4*10+3)) nextstate <= END;    
-							else nextstate <= LOGIC;
-			END:			nextstate <= END;
+            LOAD:       nextstate <= SBOX; //nexttemp = w[i-1]
+            SBOX:       nextstate <= LOGIC; //SBOX CLKS
+            LOGIC:  		if(i == (4*10+3)) nextstate <= DONE;    
+							else nextstate <= LOAD;
+			DONE:			nextstate <= DONE;
             default:    	nextstate <= state;
         endcase
     end
 	
 	//OUTPUT LOGIC
 	always_comb begin
-		case(state)
-			GEN_W:	begin 
-					w[i] = key[32*i +: 32];
-					i++;
-					end
-			LOGIC:	begin 
-					temp = w[i-1];
+		case(state) //w[i] logic
+			GEN_W:	begin
+                    w[3] = key[31:0];
+                    w[2] = key[63:32];
+                    w[1] = key[95:64];
+                    w[0] = key[127:96];
+                    end 
+			LOGIC:	begin
 					if (i%4 == 0) w[i] = w[i-4] ^ sub_temp ^ rcon[i/4];
 					else w[i] = w[i-4] ^ temp;
-					i++;
 					end
-			default: i = 0;
+			default: w[i] = 32'b0;
 		endcase
-	end
+        case(state) //temp logic
+			LOAD:	 nexttemp = w[i-1];
+			default: nexttemp <= temp;
+        endcase
+    end
+
+	assign start = (state == DONE);
 
 	//rotate word
-	assign rot_temp[7:0] = (state == LOGIC) ? (temp[15:8]) : (temp[7:0]);      //a0 <- a1
-    assign rot_temp[15:8] = (state == LOGIC) ? (temp[23:16]) : (temp[15:8]);   //a1 <- a2
-    assign rot_temp[23:16] = (state == LOGIC) ? (temp[31:24]) : (temp[23:16]); //a2 <- a3
-    assign rot_temp[31:24] = (state == LOGIC) ? (temp[7:0]) : (temp[31:24]);   //a3 <- a0
+	// assign rot_temp[7:0] = (state == SBOX) ? (temp[15:8]) : (temp[7:0]);      //a0 <- a1
+    // assign rot_temp[15:8] = (state == SBOX) ? (temp[23:16]) : (temp[15:8]);   //a1 <- a2
+    // assign rot_temp[23:16] = (state == SBOX) ? (temp[31:24]) : (temp[23:16]); //a2 <- a3
+    // assign rot_temp[31:24] = (state == SBOX) ? (temp[7:0]) : (temp[31:24]);   //a3 <- a0
+
+    assign rot_temp[31:24] = (state == SBOX) ? (temp[23:16]) : (temp[31:24]);   //09
+    assign rot_temp[23:16] = (state == SBOX) ? (temp[15:8]) : (temp[23:16]); //cf
+    assign rot_temp[15:8] = (state == SBOX) ? (temp[7:0]) : (temp[15:8]);   //4f
+	assign rot_temp[7:0] = (state == SBOX) ? (temp[31:24]) : (temp[7:0]);      //3c
+
+
+
+	
 	
 	//sub word
     sbox_sync A0(

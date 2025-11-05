@@ -26,7 +26,8 @@ module aes_core(input  logic         clk,
                 output logic [127:0] cyphertext
 );
     logic [31:0] round;
-    logic reset = ~rst; // active low reset
+    logic reset; // active low reset
+    assign reset = ~rst;
 	logic start;
     logic [31:0] w [0:43]; //4 * (Nr + 1) words
     
@@ -41,7 +42,7 @@ module aes_core(input  logic         clk,
 
     logic [127:0] sb_out, sr_out, mc_out, ark_out;
 
-    typedef enum logic [3:0] {IDLE, ROUND0, SUB_BYTES1, SUB_BYTES2, SHIFT_ROWS, MIX_COLUMNS, ADD_ROUND_KEY} statetype;
+    typedef enum logic [3:0] {IDLE, ROUND0, SUB_BYTES1, SUB_BYTES2, SHIFT_ROWS, MIX_COLUMNS, ADD_ROUND_KEY, DONE} statetype;
     statetype state, nextstate;
 
     logic [127:0] code, nextcode;
@@ -75,8 +76,9 @@ module aes_core(input  logic         clk,
             SHIFT_ROWS:     if(round == 10) nextstate <= ADD_ROUND_KEY;
                             else nextstate <= MIX_COLUMNS;
             MIX_COLUMNS:   nextstate <= ADD_ROUND_KEY;
-            ADD_ROUND_KEY:  if(round == 10) nextstate <= IDLE;
+            ADD_ROUND_KEY:  if(round == 10) nextstate <= DONE;
                             else nextstate <= SUB_BYTES1;
+            DONE:           nextstate <= IDLE;
             default:        nextstate <= IDLE;
         endcase
 	//Output Logic
@@ -87,9 +89,12 @@ module aes_core(input  logic         clk,
 		SHIFT_ROWS:		nextcode <= sr_out;
 		MIX_COLUMNS:	nextcode <= mc_out;
 		ADD_ROUND_KEY:  nextcode <= ark_out;
+        DONE:           nextcode <= code;
 		default:		nextcode <= code;
 		endcase
     end
+    
+
     //Sub Module Calls
     sub_bytes sb(
         .clk(clk),					//input
