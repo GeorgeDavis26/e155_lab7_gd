@@ -4,6 +4,7 @@
 /////////////////////////////////////////////
 
 module gd_lab7_aes(input  logic clk,
+		   input  logic rst, 
            input  logic sck, 
            input  logic sdi,
            output logic sdo,
@@ -13,5 +14,5 @@ module gd_lab7_aes(input  logic clk,
     logic [127:0] key, plaintext, cyphertext;
             
     aes_spi spi(sck, sdi, sdo, done, key, plaintext, cyphertext);   
-    aes_core core(clk, load, key, plaintext, done, cyphertext);
+    aes_core core(clk, rst, load, key, plaintext, done, cyphertext);
 endmodule

@@ -1,34 +1,34 @@
 module sub_bytes(
     input   logic         clk, 
-    input   logic         enable,
+    //input   logic         enable,
     input   logic [127:0] a,
     output  logic [127:0] y
 );
 
-    logic   [127:0]    y_interm;
+    //logic   [127:0]    y_interm;
 
     //Row 1
-    sbox_sync S00(a[127:120], clk, y_interm[127:120]);
-    sbox_sync S01(a[95:88], clk, y_interm[95:88]);
-    sbox_sync S02(a[63:56], clk, y_interm[63:56]);
-    sbox_sync S03(a[63:56], clk, y_interm[63:56]);                      
+    sbox_sync S00(a[127:120], clk, y[127:120]);
+    sbox_sync S01(a[95:88], clk, y[95:88]);
+    sbox_sync S02(a[63:56], clk, y[63:56]);
+    sbox_sync S03(a[63:56], clk, y[63:56]);                      
     //Row 2
-    sbox_sync S10(a[119:112], clk, y_interm[119:112]);
-    sbox_sync S11(a[87:80], clk, y_interm[87:80]);
-    sbox_sync S12(a[55:48], clk, y_interm[55:48] );
-    sbox_sync S13(a[23:16], clk, y_interm[23:16]);
+    sbox_sync S10(a[119:112], clk, y[119:112]);
+    sbox_sync S11(a[87:80], clk, y[87:80]);
+    sbox_sync S12(a[55:48], clk, y[55:48] );
+    sbox_sync S13(a[23:16], clk, y[23:16]);
     //Row 3
-    sbox_sync S20(a[111:104], clk, y_interm[111:104]);
-    sbox_sync S21(a[79:72], clk, y_interm[79:72]);
-    sbox_sync S22(a[47:40], clk, y_interm[47:40]);
-    sbox_sync S23(a[15:8], clk, y_interm[15:8]);
+    sbox_sync S20(a[111:104], clk, y[111:104]);
+    sbox_sync S21(a[79:72], clk, y[79:72]);
+    sbox_sync S22(a[47:40], clk, y[47:40]);
+    sbox_sync S23(a[15:8], clk, y[15:8]);
     //Row 4
-    sbox_sync S30(a[103:96], clk, y_interm[103:96]);
-    sbox_sync S31(a[71:64], clk, y_interm[71:64]);
-    sbox_sync S32(a[39:32], clk, y_interm[39:32]);
-    sbox_sync S33(a[7:0], clk, y_interm[7:0]);
+    sbox_sync S30(a[103:96], clk, y[103:96]);
+    sbox_sync S31(a[71:64], clk, y[71:64]);
+    sbox_sync S32(a[39:32], clk, y[39:32]);
+    sbox_sync S33(a[7:0], clk, y[7:0]);
 
-    assign y = enable ? (y_interm) : (a);
+    //assign y = enable ? (y_interm) : (a);
 endmodule
     // typedef enum logic [1:0] {IDLE, SUB} statetype;
     // statetype state, nextstate;

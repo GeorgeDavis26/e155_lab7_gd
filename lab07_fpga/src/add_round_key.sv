@@ -1,10 +1,10 @@
 module add_round_key(
-    input   logic         enable,
+    //input   logic         enable,
     input	logic [127:0] w, //4 * (Nr + 1) words
     input   logic [127:0] a,
     output  logic [127:0] y
 );
-    assign y = enable ? (a ^ w) : (a);
+    assign y = (a ^ w);
 endmodule
     // typedef enum logic [1:0] {IDLE, ADD};
     // statetype state, nextstate
