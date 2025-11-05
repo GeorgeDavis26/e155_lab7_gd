@@ -1,0 +1,8 @@
+---------------------------------------------------
+Report for cell gd_lab7_aes
+   Instance path: gd_lab7_aes
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  LUT4	          1        100.0
+                               LUTGATE	          1        100.0
+                                 IOBUF	          2        100.0

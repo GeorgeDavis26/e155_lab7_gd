@@ -1,0 +1,9 @@
+-w
+-gui
+-msgset "C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src/gd_e155_lab7_lattice_proj/promote.xml"
+-n 1
+-t 1
+-s 1
+-cores 1
+-hsp m
+-exp parPathBased=ON

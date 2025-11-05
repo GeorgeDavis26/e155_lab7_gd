@@ -54,15 +54,15 @@ module key_expansion(
 					else w[i] = w[i-4] ^ temp;
 					i++;
 					end
-			default: i <= 0;
+			default: i = 0;
 		endcase
 	end
 
 	//rotate word
-	assign rot_temp[7:0] = (state == LOGIC) ? (temp[8:15]) : (temp[7:0]);      //a0 <- a1
-    assign rot_temp[15:8] = (state == LOGIC) ? (temp[16:23]) : (temp[8:15]);   //a1 <- a2
-    assign rot_temp[23:16] = (state == LOGIC) ? (temp[24:31]) : (temp[16:23]); //a2 <- a3
-    assign rot_temp[31:24] = (state == LOGIC) ? (temp[7:0]) : (temp[24:31]);   //a3 <- a0
+	assign rot_temp[7:0] = (state == LOGIC) ? (temp[15:8]) : (temp[7:0]);      //a0 <- a1
+    assign rot_temp[15:8] = (state == LOGIC) ? (temp[23:16]) : (temp[15:8]);   //a1 <- a2
+    assign rot_temp[23:16] = (state == LOGIC) ? (temp[31:24]) : (temp[23:16]); //a2 <- a3
+    assign rot_temp[31:24] = (state == LOGIC) ? (temp[7:0]) : (temp[31:24]);   //a3 <- a0
 	
 	//sub word
     sbox_sync A0(

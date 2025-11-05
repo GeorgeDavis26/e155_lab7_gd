@@ -6,7 +6,7 @@
 /////////////////////////////////////////////
 
 module testbench_aes_spi();
-    logic clk, load, done, sck, sdi, sdo;
+    logic clk, rst, load, done, sck, sdi, sdo;
     logic [127:0] key, plaintext, cyphertext, expected;
 		logic [255:0] comb;
     logic [8:0] i;
@@ -15,7 +15,7 @@ module testbench_aes_spi();
     logic delay;
     
     // device under test
-    lab7_gd_aes dut(clk, sck, sdi, sdo, load, done);
+    gd_lab7_aes dut(clk, rst, sck, sdi, sdo, load, done);
     
     // test case
     initial begin   

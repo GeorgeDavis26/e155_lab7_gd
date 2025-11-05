@@ -31,7 +31,7 @@ module testbench_aes_sbox();
     logic [7:0] a, y;
     
     // device under test
-    sbox_sync dut(.clk(clk), .a(a), .y(y));
+    sbox_sync dut( .a(a), .clk(clk), .y(y));
     
     // test case
     initial begin   

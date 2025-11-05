@@ -11,7 +11,7 @@ module sub_bytes(
     sbox_sync S00(a[127:120], clk, y[127:120]);
     sbox_sync S01(a[95:88], clk, y[95:88]);
     sbox_sync S02(a[63:56], clk, y[63:56]);
-    sbox_sync S03(a[63:56], clk, y[63:56]);                      
+    sbox_sync S03(a[31:24], clk, y[31:24]);                      
     //Row 2
     sbox_sync S10(a[119:112], clk, y[119:112]);
     sbox_sync S11(a[87:80], clk, y[87:80]);
