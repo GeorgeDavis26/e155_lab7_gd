@@ -1,3 +1,11 @@
+/////////////////////////////////////////////
+// shift_rows
+//   shifts rows of the input set of 4 words
+//   depending on the AES 128 shift rows
+//.  specification.
+/////////////////////////////////////////////
+
+
 module shift_rows(
     //input   logic         enable,
     input   logic [127:0] a,
@@ -29,52 +37,3 @@ module shift_rows(
 
     //assign y = enable ? (y_interm) : (a);
 endmodule
-
-    // typedef enum logic [1:0] {IDLE, ROWS};
-    // statetype state, nextstate
-
-    // //Next State Register
-    // always_ff @(posedge clk) begin
-    //     if(reset) state <= IDLE;
-    //     else state <= nextstate;
-    // end
-
-    // // Next State Legic
-    // always_comb begin
-    //     case(state)
-    //         IDLE: if(enable) nextstate <= ROWS;
-    //               else nextstate <= IDLE;
-    //         ROWS: nextstate <= IDLE;
-    //         default:
-    //     endcase
-    // end
-
-    // // Output Logic
-    // always_comb begin
-    //     case(state)
-    //         IDLE:       y <= a;
-    //         ROWS:   begin
-    //                     //Row 1
-    //                     y[127:120] <= a[127:120];
-    //                     y[95:88] <= a[95:88];
-    //                     y[63:56] <= a[63:56];
-    //                     y[31:24] <= a[31:24];                        
-    //                     //Row 2
-    //                     y[119:112] <= a[23:16];
-    //                     y[87:80] <= a[55:48];
-    //                     y[55:48] <= a[23:16];
-    //                     y[23:16] <= a[119:112];
-    //                     //Row 3
-    //                     y[111:104] <= a[47:40];
-    //                     y[79:72] <= a[15:8];
-    //                     y[47:40] <= a[111:104];
-    //                     y[15:8] <= a[79:72];
-    //                     //Row 4
-    //                     y[103:96] <= a[7:0];
-    //                     y[71:64] <= a[39:32];
-    //                     y[39:32] <= a[71:64];
-    //                     y[7:0]  <= a[103:96];
-    //                 end
-    //         default:    y <= a;
-    //     endcase
-    // end

@@ -1,3 +1,11 @@
+/////////////////////////////////////////////
+// sub_bytes
+//   AES sub bytes module
+//   reassigns the input set of 4 words
+//   to aes cryptic sbox array at the rising 
+//   edge of a clock
+/////////////////////////////////////////////
+
 module sub_bytes(
     input   logic         clk, 
     //input   logic         enable,

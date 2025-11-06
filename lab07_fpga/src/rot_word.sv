@@ -1,3 +1,10 @@
+/////////////////////////////////////////////
+// rot_word
+//   rotates an input word specified
+//   by the AES key expansion module
+/////////////////////////////////////////////
+
+
 module rot_word(
     input   logic           enable,
     input   logic   [31:0]  a,

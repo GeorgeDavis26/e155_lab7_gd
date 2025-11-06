@@ -1,3 +1,13 @@
+/////////////////////////////////////////////
+// key_expansion
+//   generates 44 words for the aes core to 
+//.  use as its base for add round key
+//.  this module takes in the input key and 
+//.  scrambles it into 44 words
+/////////////////////////////////////////////
+
+
+
 module key_expansion(
     input   logic         clk, 
 	input 	logic		  enable,

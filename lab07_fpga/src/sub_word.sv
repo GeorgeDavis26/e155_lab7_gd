@@ -1,3 +1,10 @@
+/////////////////////////////////////////////
+// sub_word
+//   performs AES subword function by converting 
+//.  the input word to its corrosponding
+//.  word in the cryptic aes sbox array
+/////////////////////////////////////////////
+
 module sub_word(
     input   logic               clk,
     input   logic               enable,
