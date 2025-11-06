@@ -1,0 +1,1 @@
+C:/lscc/radiant/2024.2/questasim/win64/VisualizerRls/bin/viscom.exe -nolock -quiet -jmem_size 393216 work.aes_spi(fast) work.testbench_aes_spi(fast) -quiet -auto_acc_if_foreign -work work +acc -allow_unnamed -o _opt2 -id 7-00be43eaec8a-690c74c0-83-2110 +__design_bin_path+C:/Users/gdavis/Desktop/e155_lab7_gd/lab07_fpga/src +__betafsm

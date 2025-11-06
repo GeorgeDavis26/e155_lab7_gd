@@ -9,7 +9,7 @@ module key_expansion(
 
 	logic [31:0] i;
 	
-    typedef enum logic [3:0] {IDLE, GEN_W, LOAD, SBOX, LOGIC, DONE} statetype;
+    typedef enum logic [3:0] {IDLE, GEN_W, LOAD, SBOX, LOGIC, DONE, HALT} statetype;
     statetype state, nextstate;
 	
     logic [31:0] temp, nexttemp, rot_temp, sub_temp; // temp word to assign to w
@@ -49,7 +49,8 @@ module key_expansion(
             SBOX:       nextstate <= LOGIC; //SBOX CLKS
             LOGIC:  		if(i == (4*10+3)) nextstate <= DONE;    
 							else nextstate <= LOAD;
-			DONE:			nextstate <= DONE;
+			DONE:			nextstate <= HALT;
+            HALT:           nextstate <= HALT;
             default:    	nextstate <= state;
         endcase
     end

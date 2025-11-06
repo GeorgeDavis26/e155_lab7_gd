@@ -58,7 +58,7 @@ module aes_core(input  logic         clk,
             code <= nextcode;
         end
     end
-    
+
     //round Register
     always_ff @(posedge clk) begin
         if(state == IDLE) round = 0;
@@ -78,7 +78,7 @@ module aes_core(input  logic         clk,
             MIX_COLUMNS:   nextstate <= ADD_ROUND_KEY;
             ADD_ROUND_KEY:  if(round == 10) nextstate <= DONE;
                             else nextstate <= SUB_BYTES1;
-            DONE:           nextstate <= IDLE;
+            DONE:           nextstate <= DONE;
             default:        nextstate <= IDLE;
         endcase
 	//Output Logic
@@ -93,7 +93,9 @@ module aes_core(input  logic         clk,
 		default:		nextcode <= code;
 		endcase
     end
-    
+
+    assign done = (state == DONE);
+    assign cyphertext = (state == DONE) ? (code): 128'b0;
 
     //Sub Module Calls
     sub_bytes sb(
@@ -113,7 +115,7 @@ module aes_core(input  logic         clk,
     ); //DONE
 
     add_round_key ark(
-        .w({w[round], w[round+1], w[round+2], w[round+3]}),    //input [31:0][0:3] 
+        .w({w[4*round], w[4*round+1], w[4*round+2], w[4*round+3]}),    //input [31:0][0:3] 
         .a(code),                   //input [127:0]
         .y(ark_out)        //output [127:0]
     ); //DONE
